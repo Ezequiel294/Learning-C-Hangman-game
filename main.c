@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-bool isValidGuess(char, char*, int*);
+bool isValidGuess(char, char *, int *);
 
 int main()
 {
@@ -95,7 +95,7 @@ bool isValidGuess(char guess, char *userTries, int *userTriesCount)
     if (bufferChar != '\n')
     {
         printf("\nINVALID INPUT. Please enter a single alphabetic letter\n");
-        fflush(stdin);  // Clear Buffer
+        fflush(stdin); // Clear Buffer
         return false;
     }
 
