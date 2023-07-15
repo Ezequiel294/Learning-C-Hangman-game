@@ -46,21 +46,13 @@ int main()
 
                 // Removing that character from lettersMissing
                 for (int j = 0; j < strlen(lettersMissing); j++)
-                {
                     if (userGuess == lettersMissing[j])
-                    {
                         memmove(&lettersMissing[j], &lettersMissing[j + 1], (strlen(lettersMissing) - j) + 1);
-                    }
-                }
 
                 // Loop through the indices to assign the value(s) to lettersDiscovered
                 for (int k = 0; k < strlen(word); k++)
-                {
                     if (userGuess == word[k])
-                    {
                         wordDiscovered[k] = userGuess;
-                    }
-                }
 
                 break;
             }
