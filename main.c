@@ -66,16 +66,10 @@ int main()
     }
 
     if (strcmp(wordDiscovered, word) == 0)
-    {
-        printf("\nYou are safe!!\n");
-        printf("The word was \"%s\"\n", word);
-    }
+        printf("\nYou are safe!!\nThe word was \"%s\"\n", word);
 
     if (attemptsLeft == 0)
-    {
-        printf("\nYou are dead :(\n");
-        printf("The word was \"%s\"\n", word);
-    }
+        printf("\nYou are dead :(\nThe word was \"%s\"\n", word);
 
     return 0;
 }
@@ -108,5 +102,6 @@ bool isValidGuess(char guess, char *userTries, int *userTriesCount)
 
     userTries[*userTriesCount] = guess;
     (*userTriesCount)++;
+
     return true;
 }
