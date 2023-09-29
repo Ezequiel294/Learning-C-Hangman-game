@@ -1,3 +1,0 @@
-C:/Users/ezequ/OneDrive/Documentos/Programacion/C-course/hangmanGame/cmake-build-debug/CMakeFiles/hangmanGame.dir
-C:/Users/ezequ/OneDrive/Documentos/Programacion/C-course/hangmanGame/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/ezequ/OneDrive/Documentos/Programacion/C-course/hangmanGame/cmake-build-debug/CMakeFiles/rebuild_cache.dir
