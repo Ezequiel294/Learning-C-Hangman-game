@@ -3,6 +3,9 @@
 # Computational Thinking With Data Science
 # January 25, 2023
 
+import random
+
+
 def isValidGuess(guess):
     if len(guess) == 0:
         return "\nYour guess can't be empty"
@@ -35,12 +38,15 @@ def findIndices(listToCheck, itemsToFind):
     return indices
 
 
-word = "airplane"
+with open('words.txt', 'r') as file:
+    words = file.read().split(', ')
+
+word = random.choice(words)
 wordList = list(word)
-lettersDiscovered = ['_', '_', '_', '_', '_', '_', '_', '_']
-lettersMissing = ['a', 'i', 'r', 'p', 'l', 'n', 'e']
+lettersDiscovered = ['_' for i in wordList]
+lettersMissing = list(set(wordList))
 wordDiscovered = ''.join(lettersDiscovered)
-attemptsLeft = 10
+attemptsLeft = 7
 userTries = []
 
 print("\nWelcome to the Hangman Game!! Hope you enjoy\n")
