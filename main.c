@@ -1,17 +1,37 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
+#define MAX_WORD_LENGTH 100
+#define MAX_WORDS 500
+
+void readWordsFromFile(const char *, char[][MAX_WORD_LENGTH], int *);
 bool isValidGuess(char, char *, int *);
 
 int main() {
-  const char word[] = "airplane";
-  char lettersMissing[] = "airplne";
-  char wordDiscovered[] = "________";
+  char words[MAX_WORDS][MAX_WORD_LENGTH];
+  int wordCount;
+  readWordsFromFile("words.txt", words, &wordCount);
+
+  srand(time(NULL));
+  int randomIndex = rand() % wordCount;
+  const char *word = words[randomIndex];
+
+  char lettersMissing[MAX_WORD_LENGTH];
+  strcpy(lettersMissing, word); // Assuming lettersMissing is initially the same as word
+
+  char wordDiscovered[MAX_WORD_LENGTH];
+  for (int i = 0; i < strlen(word); i++) {
+    wordDiscovered[i] = '_';
+  }
+  wordDiscovered[strlen(word)] = '\0';
+
   char userTries[26];
   int userTriesCount = 0;
-  int attemptsLeft = 10;
+  int attemptsLeft = 7;
   char userGuess;
   bool checker;
   bool result;
@@ -42,8 +62,7 @@ int main() {
         // Removing that character from lettersMissing
         for (int j = 0; j < strlen(lettersMissing); j++)
           if (userGuess == lettersMissing[j])
-            memmove(&lettersMissing[j], &lettersMissing[j + 1],
-                    (strlen(lettersMissing) - j) + 1);
+            memmove(&lettersMissing[j], &lettersMissing[j + 1], (strlen(lettersMissing) - j) + 1);
 
         // Loop through the indices to assign the value(s) to lettersDiscovered
         for (int k = 0; k < strlen(word); k++)
@@ -67,6 +86,28 @@ int main() {
     printf("\nYou are dead :(\nThe word was \"%s\"\n", word);
 
   return 0;
+}
+
+void readWordsFromFile(const char *filename, char words[][MAX_WORD_LENGTH], int *wordCount) {
+  FILE *file = fopen(filename, "r");
+  if (file == NULL) {
+    perror("Unable to open file");
+    exit(EXIT_FAILURE);
+  }
+
+  *wordCount = 0;
+  char buffer[MAX_WORDS * MAX_WORD_LENGTH];
+  if (fgets(buffer, sizeof(buffer), file) != NULL) {
+    char *token = strtok(buffer, ", ");
+    while (token != NULL && *wordCount < MAX_WORDS) {
+      strncpy(words[*wordCount], token, MAX_WORD_LENGTH - 1);
+      words[*wordCount][MAX_WORD_LENGTH - 1] = '\0'; // Ensure null-termination
+      (*wordCount)++;
+      token = strtok(NULL, ", ");
+    }
+  }
+
+  fclose(file);
 }
 
 bool isValidGuess(char guess, char *userTries, int *userTriesCount) {
