@@ -92,3 +92,4 @@ if wordDiscovered == word:
 
 if attemptsLeft == 0:
     print("\nYou are dead :(")
+    print(f"The word was \"{word}\"")
